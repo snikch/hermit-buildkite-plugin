@@ -3,4 +3,9 @@
 set -euo pipefail
 
 echo "~~~ Init Hermit environment"
-. bin/activate-hermit && export PATH="$PATH:/var/lib/buildkite-agent/bin"
+if ! . bin/activate-hermit; then
+  echo "Failed to initialize Hermit environment"
+  exit 1
+fi
+
+export PATH="$PATH:/var/lib/buildkite-agent/bin"
